@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+    border-collapse: collapse; /* Faz as bordas se unirem */
+}
+th, td {
+    border: 1px solid black; /* Borda preta */
+    padding: 8px; /* Espaçamento interno */
+    text-align: left; /* Alinhamento do texto */
+}
+th {
+    background-color: #f2f2f2; /* Cor de fundo para cabeçalho */
+}

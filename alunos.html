@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Alunos</title>
+    <script src="alunos.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="aluno.css"/>
+</head>
+<body>
+    <h1>Lista de Alunos</h1>
+    <table id="alunosTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Série</th>
+                <th>Data de Empréstimo</th>
+                <th>Motivo</th>
+                <th>Livros</th>
+            </tr>
+        </thead>
+        <tbody id="alunosList"></tbody>
+    </table>
+    <p id="errorMessage" style="color: red;"></p>
+
+    <h2>Buscar Aluno</h2>
+    <input type="number" id="alunoId" placeholder="ID do Aluno">
+    <button id="buscarAluno">Buscar Aluno</button>
+
+    <h2>Adicionar Aluno</h2>
+    <input type="text" id="name" placeholder="Nome do Aluno">
+    <input type="text" id="serie" placeholder="Série do Aluno">
+    <input type="text" id="dataEmprestimo" placeholder="Data de Empréstimo">
+    <input type="text" id="motivo" placeholder="Motivo">
+    <button id="adicionarAluno">Adicionar Aluno</button>
+</body>
+</html>

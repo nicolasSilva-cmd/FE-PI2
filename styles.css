@@ -1,0 +1,35 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.inputs input {
+    padding: 5px;
+}
+
+button {
+    padding: 5px 10px;
+}

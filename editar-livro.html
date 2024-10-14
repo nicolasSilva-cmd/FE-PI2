@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Livro</title>
+    <link rel="stylesheet" href="F:\Estudos\Projeto Integrador II\FrontEnd\styles.css">
+</head>
+<body>
+
+<h1>Editar Livro</h1>
+
+<div id="livroDetalhes">
+    <p><strong>Autor:</strong> <span id="autor"></span></p>
+    <p><strong>Título:</strong> <span id="titulo"></span></p>
+    <input type="number" id="quantidadeInput" placeholder="Nova Quantidade">
+    <button id="updateButton">Atualizar</button>
+    <br>
+    <a href="livros.html">Voltar para a listagem de livros</a>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const autor = urlParams.get('autor');
+    const titulo = urlParams.get('titulo');
+    const quantidade = urlParams.get('quantidade');
+
+    document.getElementById('autor').textContent = autor;
+    document.getElementById('titulo').textContent = titulo;
+    document.getElementById('quantidadeInput').value = quantidade;
+
+    document.getElementById('updateButton').addEventListener('click', async () => {
+        const novaQuantidade = document.getElementById('quantidadeInput').value;
+        try {
+            const response = await fetch(`http://localhost:8081/livro/${titulo}?quantidade=${novaQuantidade}`, {
+                method: 'PUT',
+            });
+            if (!response.ok) throw new Error('Erro ao atualizar livro');
+            alert('Livro atualizado com sucesso!');
+            window.location.href = 'livros.html'; // Redireciona para a página de listagem de livros
+        } catch (error) {
+            console.error('Erro ao atualizar livro:', error);
+        }
+    });
+</script>
+
+</body>
+</html>

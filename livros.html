@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Livros</title>
+    <link rel="stylesheet" href="F:\Estudos\Projeto Integrador II\FrontEnd\styles.css">
+</head>
+<body>
+
+<h1>Gerenciador de Livros</h1>
+
+<!-- Tabela para listagem de livros -->
+<table id="livrosList">
+    <thead>
+        <tr>
+            <th>Autor</th>
+            <th>Título</th>
+            <th>Quantidade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Os livros serão inseridos aqui -->
+    </tbody>
+</table>
+
+<!-- Sessão para buscar livro por ISBN -->
+<h2>Buscar Livro por ISBN</h2>
+<input type="text" id="isbnInput" placeholder="ISBN">
+<button id="findButton">Buscar</button>
+<div id="livroEncontrado" style="display:none;">
+    <h3>Livro Encontrado:</h3>
+    <p id="autor"></p>
+    <p id="titulo"></p>
+    <input type="number" id="quantidadeInput" placeholder="Quantidade">
+    <button id="saveButton">Salvar Livro</button>
+</div>
+
+<!-- Sessão para buscar livro por título -->
+<h2>Buscar Livro por Título</h2>
+<input type="text" id="tituloInputBusca" placeholder="Digite o título do livro">
+<button id="findByTitleButton">Buscar por Título</button>
+
+
+<!-- Sessão para buscar livro por autor -->
+<h2>Buscar Livro por Autor</h2>
+<input type="text" id="autorInputBusca" placeholder="Digite o autor do livro">
+<button id="findByAuthorButton">Buscar por Autor</button>
+
+<!-- Sessão para cadastrar um novo livro -->
+<h2>Cadastrar Novo Livro</h2>
+<input type="text" id="tituloInput" placeholder="Título">
+<input type="text" id="autorInput" placeholder="Autor">
+<input type="number" id="quantidadeInput2" placeholder="Quantidade">
+<button id="createButton">Cadastrar Livro</button>
+
+<!-- Mensagem de erro para validação de campos vazios -->
+<div id="errorMessage" style="color: red; display: none;"></div>
+
+<script src="livros.js"></script>
+
+</body>
+</html>
