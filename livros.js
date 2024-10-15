@@ -1,4 +1,5 @@
-const apiUrlLivros = 'http://localhost:8081/livro'; // URL para LivroController
+const apiUrlLivros = 'http://localhost:8081/livro';
+const apiUrlAlunos = 'http://localhost:8081/alunos'; // URL para LivroController
 const apiUrlApi = 'http://localhost:8081/google-api'; // URL para ApiController
 
 let livros = [];
@@ -13,7 +14,7 @@ const listAllLivros = async () => {
         const response = await fetch(apiUrlLivros);
         if (response.ok) {
             livros = await response.json();
-            renderLivros();
+            renderLivros(); // Renderiza a lista de livros
         }
     } catch (error) {
         console.error('Erro ao listar livros:', error);
@@ -43,7 +44,6 @@ const findLivroByTitulo = async (titulo) => {
     }
 };
 
-
 // Função para buscar livro por autor
 const findLivroByAutor = async (autor) => {
     try {
@@ -66,7 +66,7 @@ const createLivro = async () => {
     const quantidadeInput = document.getElementById('quantidadeInput2').value;
 
     // Verifica se todos os campos estão preenchidos
-    if (tituloInput == "" || autorInput == "" || quantidadeInput == "") {
+    if (tituloInput === "" || autorInput === "" || quantidadeInput === "") {
         alert('Erro: Todos os campos (título, autor, quantidade) devem ser preenchidos.');
         return;
     }
@@ -98,7 +98,8 @@ const updateLivro = async (titulo, novaQuantidade) => {
         });
         if (response.ok) {
             alert('Livro atualizado com sucesso!');
-            window.location.href = 'F:\Estudos\Projeto Integrador II\FrontEnd\livros.html'; // Redireciona para a página de listagem de livros
+            window.location.href = 'F:\\Estudos\\Projeto Integrador II\\FrontEnd\\livros.html'; // Redireciona para a página de listagem de livros
+    
         }
     } catch (error) {
         console.error('Erro ao atualizar livro:', error);
@@ -107,16 +108,38 @@ const updateLivro = async (titulo, novaQuantidade) => {
 
 // Função para deletar um livro
 const deleteLivro = async (titulo) => {
+    if (confirm(`Tem certeza que deseja excluir o livro ${titulo}?`)) {
     try {
         const response = await fetch(`${apiUrlLivros}/${titulo}`, {
             method: 'DELETE',
-        });
+            });
         if (response.ok) {
             console.log('Livro deletado');
             listAllLivros(); // Atualiza a lista após deleção
+            }
+        } catch (error) {
+        console.error('Erro ao deletar livro:', error);
+        } 
+    }
+};
+
+
+
+// Função para associar um livro a um aluno
+const associarLivroAoAluno = async (idAluno, tituloLivro) => {
+    try {
+        const response = await fetch(`${apiUrlAlunos}/associar/${idAluno}/${tituloLivro}`, {
+            method: 'PUT',
+        });
+        if (response.ok) {
+            alert(`Livro "${tituloLivro}" associado ao aluno de ID ${idAluno}.`);
+        } else {
+            // Se o ID do aluno não for encontrado, alerta o usuário
+            alert(`Erro: Não foi possível associar o livro. Verifique se o ID do aluno "${idAluno}" existe.`);
         }
     } catch (error) {
-        console.error('Erro ao deletar livro:', error);
+        console.error('Erro ao associar livro ao aluno:', error);
+        alert('Erro ao associar o livro. Tente novamente mais tarde.');
     }
 };
 
@@ -137,13 +160,21 @@ const renderLivros = () => {
             <td>${livro.titulo ? livro.titulo : 'Título não informado'}</td>
             <td>${livro.quantidade ? livro.quantidade : '0'}</td>
             <td>
-                <a href="editar-livro.html?autor=${encodeURIComponent(livro.autor)}&titulo=${encodeURIComponent(livro.titulo)}&quantidade=${livro.quantidade}">Editar</a>
+                <button onclick="editarLivro('${livro.autor}', '${livro.titulo}', '${livro.quantidade}')">Editar</button>
                 <button onclick="deleteLivro('${livro.titulo}')">Deletar</button>
             </td>
         `;
         livrosList.appendChild(tr);
     });
 };
+
+
+// Função para editar um livro
+const editarLivro = (autor, titulo, quantidade) => {
+    window.location.href = `editar-livro.html?autor=${encodeURIComponent(autor)}&titulo=${encodeURIComponent(titulo)}&quantidade=${quantidade}`;
+};
+
+
 
 // Função para limpar os campos após cadastrar
 const limparCampos = () => {
@@ -168,6 +199,19 @@ const setupEventListeners = () => {
 
     document.getElementById('quantidadeInput2').addEventListener('input', (e) => {
         quantidade = e.target.value;
+    });
+
+    // Associar livro ao aluno
+    document.getElementById('associarButton').addEventListener('click', () => {
+        const alunoId = document.getElementById('alunoIdInput').value;
+        const livroTitulo = document.getElementById('livroTituloInput').value;
+
+        if (!alunoId || !livroTitulo) {
+            alert('Por favor, preencha ambos os campos: ID do aluno e título do livro.');
+            return;
+        }
+
+        associarLivroAoAluno(alunoId, livroTitulo);
     });
 
     // Usando os novos IDs para busca por título e autor
