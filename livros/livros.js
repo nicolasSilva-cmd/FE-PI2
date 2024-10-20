@@ -51,6 +51,9 @@ const findLivroByAutor = async (autor) => {
         if (response.ok) {
             livros = await response.json(); // Armazenar os livros do autor encontrado
             renderLivros(); // Renderizar os livros encontrados
+        } else {
+            alert('Nenhum livro encontrado para esse autor.');
+            listAllLivros(); // Retorna a lista completa
         }
     } catch (error) {
         console.error('Erro ao buscar livro por autor:', error);
@@ -246,6 +249,16 @@ const setupEventListeners = () => {
             alert('Por favor, insira um ISBN.');
         }
     });
+
+    document.getElementById('findByTitleButton').addEventListener('click', () => {
+        const tituloId = document.getElementById('tituloInputBusca').value;
+        findLivroByTitulo(tituloId);
+    });
+    document.getElementById('findByAuthorButton').addEventListener('click', () => {
+    const autorId = document.getElementById('autorInputBusca').value;
+    findLivroByAutor(autorId);
+    });
+
 
     document.getElementById('createButton').addEventListener('click', () => {
         createLivro();

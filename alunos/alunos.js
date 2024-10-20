@@ -90,6 +90,36 @@ const buscarAlunoPorId = async (id) => {
     }
 };
 
+const buscarAlunoPorNome = async (nome) => {
+    try {
+        const response = await fetch(`${url}/nome/${nome}`);
+        if (!response.ok) throw new Error('Aluno não encontrado');
+
+        const alunos = await response.json(); // Agora tratando a resposta como uma lista
+        document.getElementById('alunosList').innerHTML = ''; // Limpa a tabela
+
+        // Itera sobre os alunos e renderiza cada um
+        alunos.forEach(aluno => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${aluno.id}</td>
+                <td>${aluno.name}</td>
+                <td>${aluno.serie}</td>
+                <td>${aluno.dataEmprestimo || 'N/A'}</td>
+                <td>${aluno.motivo || 'N/A'}</td>
+                <td>${aluno.livros ? aluno.livros.map(l => l.titulo).join(', ') : 'Nenhum'}</td>
+                <td>
+                    <button onclick="editarAluno(${aluno.id})">Editar</button>
+                    <button onclick="deletarAluno(${aluno.id})">Deletar</button>
+                </td>
+            `;
+            document.getElementById('alunosList').appendChild(tr);
+        });
+    } catch (error) {
+        alert(error.message);
+    }
+};
+
 // Função para incluir um novo aluno
 const incluirAluno = async (aluno) => {
     try {
@@ -119,6 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const idAluno = document.getElementById('alunoId').value;
         buscarAlunoPorId(idAluno);
     });
+
+    document.getElementById('buscarAlunoNome').addEventListener('click', () => {
+        const nomeAluno = document.getElementById('alunoNome').value;
+        buscarAlunoPorNome(nomeAluno);
+    })
 
     // Evento para o botão de adicionar aluno
     document.getElementById('adicionarAluno').addEventListener('click', () => {
