@@ -1,4 +1,4 @@
-const url = 'http://localhost:8081/alunos'; // URL para sua API de alunos
+const url = 'http://18.188.106.53/alunos'; // URL para sua API de alunos
 let alunos = []; // Armazena a lista de alunos
 
 // Função para listar todos os alunos
