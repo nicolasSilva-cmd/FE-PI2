@@ -1,4 +1,4 @@
-const url = 'http://localhost:8081/alunos'; // URL da API de alunos
+const url = 'https://3.129.7.57/alunos'; // URL da API de alunos
 
 // Função para carregar os dados do aluno que será editado
 const carregarDadosAluno = async () => {

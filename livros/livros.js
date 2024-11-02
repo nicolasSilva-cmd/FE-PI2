@@ -1,6 +1,6 @@
-const apiUrlLivros = 'http://localhost:8081/livro';
-const apiUrlAlunos = 'http://localhost:8081/alunos'; // URL para LivroController
-const apiUrlApi = 'http://localhost:8081/google-api'; // URL para ApiController
+const apiUrlLivros = 'https://3.129.7.57/livro';
+const apiUrlAlunos = 'https://3.129.7.57/alunos'; // URL para LivroController
+const apiUrlApi = 'https://3.129.7.57/google-api'; // URL para ApiController
 
 let livros = [];
 let titulo = null;
