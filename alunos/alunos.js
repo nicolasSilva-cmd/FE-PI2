@@ -1,4 +1,4 @@
-const url = 'https://3.129.7.57/alunos'; // URL para sua API de alunos
+const url = 'https://projetointegrador.space/alunos'; // URL para sua API de alunos
 let alunos = []; // Armazena a lista de alunos
 
 // Função para listar todos os alunos
