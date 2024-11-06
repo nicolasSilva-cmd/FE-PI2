@@ -1,5 +1,5 @@
- const apiUrlLivros = 'https://projetointegrador.space/livro';
- const apiUrlAlunos = 'https://projetointegrador.space/alunos'; // URL para LivroController
+const apiUrlLivros = 'https://projetointegrador.space/livro';
+const apiUrlAlunos = 'https://projetointegrador.space/alunos'; // URL para LivroController
 const apiUrlApi = 'https://projetointegrador.space/google-api'; // URL para ApiController
 
 
