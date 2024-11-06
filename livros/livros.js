@@ -1,6 +1,7 @@
-const apiUrlLivros = 'http://18.188.106.53/livro';
-const apiUrlAlunos = 'http://18.188.106.53/alunos'; // URL para LivroController
-const apiUrlApi = 'http://18.188.106.53/google-api'; // URL para ApiController
+const apiUrlLivros = 'https://projetointegrador.space/livro';
+const apiUrlAlunos = 'https://projetointegrador.space/alunos'; // URL para LivroController
+const apiUrlApi = 'https://projetointegrador.space/google-api'; // URL para ApiController
+
 
 let livros = [];
 let titulo = null;
