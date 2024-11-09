@@ -25,7 +25,7 @@ const listAllLivros = async () => {
 // Função para buscar livro por título
 const findLivroByTitulo = async (titulo) => {
     try {
-        const response = await fetch(`${apiUrlLivros}/titulo?titulo=${titulo}`);
+        const response = await fetch(`${apiUrlLivros}/find_titulo?titulo=${titulo}`);
         if (response.ok) {
             const livrosEncontrados = await response.json(); // Obter a lista de livros
             if (livrosEncontrados.length > 0) { // Verifica se a lista não está vazia
@@ -48,7 +48,7 @@ const findLivroByTitulo = async (titulo) => {
 // Função para buscar livro por autor
 const findLivroByAutor = async (autor) => {
     try {
-        const response = await fetch(`${apiUrlLivros}/autor?autor=${autor}`);
+        const response = await fetch(`${apiUrlLivros}/find_autor?autor=${autor}`);
         if (response.ok) {
             livros = await response.json(); // Armazenar os livros do autor encontrado
             renderLivros(); // Renderizar os livros encontrados
