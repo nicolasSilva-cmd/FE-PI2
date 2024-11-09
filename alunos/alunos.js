@@ -159,9 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('adicionarAluno').addEventListener('click', () => {
         const aluno = {
             name: document.getElementById('name').value,
-            serie: document.getElementById('serie').value,
-            dataEmprestimo: document.getElementById('dataEmprestimo').value,
-            motivo: document.getElementById('motivo').value,
+            serie: document.getElementById('serie').value
         };
         incluirAluno(aluno);
     });
