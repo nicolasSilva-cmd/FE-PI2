@@ -183,7 +183,7 @@ const displayLivroDetails = (livro) => {
     // Adiciona o evento de clique no botão de salvar
     document.getElementById('saveButton').onclick = () => {
         const quantidade = document.getElementById('quantidadeInput').value;
-        saveLivroByISBN(livro.isbn, quantidade);
+        saveLivroByISBN(isbn, quantidade);
     };
 };
 
