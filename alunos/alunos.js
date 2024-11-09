@@ -92,7 +92,7 @@ const buscarAlunoPorId = async (id) => {
 
 const buscarAlunoPorNome = async (nome) => {
     try {
-        const response = await fetch(`${url}/nome?nome=${nome}`);
+        const response = await fetch(`${url}/find_nome?nome=${nome}`);
         if (!response.ok) throw new Error('Aluno não encontrado');
 
         const alunos = await response.json(); // Agora tratando a resposta como uma lista
