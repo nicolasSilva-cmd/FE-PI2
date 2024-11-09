@@ -159,7 +159,7 @@ const findLivroByISBN = async (isbn) => {
 // Função para salvar livro com base no ISBN
 const saveLivroByISBN = async (isbn, quantidade) => {
     try {
-        const response = await fetch(`${apiUrlApi}/post/?isbn=${isbn}&quantidade=${quantidade}`, {
+        const response = await fetch(`${apiUrlApi}/post?isbn=${isbn}&quantidade=${quantidade}`, {
             method: 'GET',
         });
         if (response.ok) {
