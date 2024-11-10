@@ -25,15 +25,15 @@ const listAllLivros = async () => {
 // Função para buscar livro por título
 const findLivroByTitulo = async (titulo) => {
     try {
-        const response = await fetch(`https://projetointegrador.space/livro/find_titulo?titulo=${titulo}`);
+        const response = await fetch(`https://projetointegrador.space/livro/find_titulo?titulo=${encodeURIComponent(titulo)}`);
         if (response.ok) {
-            const livrosEncontrados = await response.json(); // Obter a lista de livros
-            if (livrosEncontrados.length > 0) { // Verifica se a lista não está vazia
-                livros = livrosEncontrados; // Armazenar os livros encontrados
-                renderLivros(); // Renderizar os livros encontrados
+            const livrosEncontrados = await response.json(); 
+            if (livrosEncontrados.length > 0) { 
+                livros = livrosEncontrados; 
+                renderLivros(); 
             } else {
                 alert('Nenhum livro encontrado com esse título.');
-                listAllLivros(); // Retorna a lista completa
+                listAllLivros(); 
             }
         } else {
             alert('Erro ao buscar livro.');
@@ -45,16 +45,15 @@ const findLivroByTitulo = async (titulo) => {
     }
 };
 
-// Função para buscar livro por autor
 const findLivroByAutor = async (autor) => {
     try {
-        const response = await fetch(`https://projetointegrador.space/livro/find_autor?autor=${autor}`);
+        const response = await fetch(`https://projetointegrador.space/livro/find_autor?autor=${encodeURIComponent(autor)}`);
         if (response.ok) {
-            livros = await response.json(); // Armazenar os livros do autor encontrado
-            renderLivros(); // Renderizar os livros encontrados
+            livros = await response.json();
+            renderLivros(); 
         } else {
             alert('Nenhum livro encontrado para esse autor.');
-            listAllLivros(); // Retorna a lista completa
+            listAllLivros(); 
         }
     } catch (error) {
         console.error('Erro ao buscar livro por autor:', error);
@@ -62,14 +61,12 @@ const findLivroByAutor = async (autor) => {
     }
 };
 
-// Função para criar um novo livro
 const createLivro = async () => {
-    // Atualizando os valores dos campos diretamente dos inputs antes de validar
+
     const tituloInput = document.getElementById('tituloInput').value;
     const autorInput = document.getElementById('autorInput').value;
     const quantidadeInput = document.getElementById('quantidadeInput2').value;
 
-    // Verifica se todos os campos estão preenchidos
     if (tituloInput === "" || autorInput === "" || quantidadeInput === "") {
         alert('Erro: Todos os campos (título, autor, quantidade) devem ser preenchidos.');
         return;
@@ -94,7 +91,6 @@ const createLivro = async () => {
     }
 };
 
-// Função para atualizar a quantidade de um livro
 const updateLivro = async (titulo, novaQuantidade) => {
     try {
         const response = await fetch(`${apiUrlLivros}/${titulo}?quantidade=${novaQuantidade}`, {
@@ -109,7 +105,6 @@ const updateLivro = async (titulo, novaQuantidade) => {
     }
 };
 
-// Função para deletar um livro
 const deleteLivro = async (titulo) => {
     if (confirm(`Tem certeza que deseja excluir o livro ${titulo}?`)) {
         try {
@@ -118,7 +113,7 @@ const deleteLivro = async (titulo) => {
             });
             if (response.ok) {
                 console.log('Livro deletado');
-                listAllLivros(); // Atualiza a lista após deleção
+                listAllLivros(); 
             }
         } catch (error) {
             console.error('Erro ao deletar livro:', error);
@@ -126,7 +121,6 @@ const deleteLivro = async (titulo) => {
     }
 };
 
-// Função para associar um livro a um aluno
 const associarLivroAoAluno = async (idAluno, tituloLivro) => {
     try {
         const response = await fetch(`${apiUrlAlunos}/associar/${idAluno}/${tituloLivro}`, {
@@ -143,7 +137,6 @@ const associarLivroAoAluno = async (idAluno, tituloLivro) => {
     }
 };
 
-// Função para buscar livro por ISBN
 const findLivroByISBN = async (isbn) => {
     try {
         const response = await fetch(`${apiUrlApi}/?isbn=${isbn}`);
@@ -156,7 +149,6 @@ const findLivroByISBN = async (isbn) => {
     }
 };
 
-// Função para salvar livro com base no ISBN
 const saveLivroByISBN = async (isbn, quantidade) => {
     try {
         const response = await fetch(`${apiUrlApi}/post?isbn=${isbn}&quantidade=${quantidade}`, {
@@ -173,25 +165,22 @@ const saveLivroByISBN = async (isbn, quantidade) => {
     }
 };
 
-// Função para exibir os detalhes do livro encontrado
 const displayLivroDetails = (livro) => {
     document.getElementById('livroEncontrado').style.display = 'block';
     document.getElementById('autor').textContent = `Autor: ${livro.autor}`;
     document.getElementById('titulo').textContent = `Título: ${livro.titulo}`;
     document.getElementById('quantidadeInput').value = livro.quantidade || 1;
 
-    // Adiciona o evento de clique no botão de salvar
     document.getElementById('saveButton').onclick = () => {
         const quantidade = document.getElementById('quantidadeInput').value;
         saveLivroByISBN(isbn, quantidade);
     };
 };
 
-// Função para renderizar a lista de livros na tabela
 const renderLivros = () => {
     const livrosList = document.getElementById('livrosList').getElementsByTagName('tbody')[0];
-    livrosList.innerHTML = ''; // Limpa a tabela antes de inserir os livros
-
+    livrosList.innerHTML = ''; 
+    
     if (livros.length === 0) {
         livrosList.innerHTML = '<tr><td colspan="4">Nenhum livro encontrado</td></tr>';
         return;
@@ -212,19 +201,16 @@ const renderLivros = () => {
     });
 };
 
-// Função para editar um livro
 const editarLivro = (autor, titulo, quantidade) => {
     window.location.href = `editar-livro.html?autor=${encodeURIComponent(autor)}&titulo=${encodeURIComponent(titulo)}&quantidade=${quantidade}`;
 };
 
-// Função para limpar os campos após cadastrar
 const limparCampos = () => {
     document.getElementById('tituloInput').value = '';
     document.getElementById('autorInput').value = '';
     document.getElementById('quantidadeInput2').value = '';
 };
 
-// Função para configurar os eventos
 const setupEventListeners = () => {
     document.getElementById('isbnInput').addEventListener('input', (e) => {
         isbn = e.target.value;
