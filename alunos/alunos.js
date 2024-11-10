@@ -92,7 +92,7 @@ const buscarAlunoPorId = async (id) => {
 
 const buscarAlunoPorNome = async (nome) => {
     try {
-        const response = await fetch(`https://projetointegrador.space/alunos/find_nome?nome=${nome}`);
+        const response = await fetch(`https://projetointegrador.space/alunos/find_nome?nome=${encodeURIComponent(nome)}`);
         if (!response.ok) throw new Error('Aluno não encontrado');
 
         const alunos = await response.json(); // Agora tratando a resposta como uma lista
